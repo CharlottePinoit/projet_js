@@ -1,0 +1,117 @@
+h3{
+    color: #1D2C5E
+
+}
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+h1{
+ font-family: 'Fredoka One', sans-serif;
+    font-size: 80px;
+    color: #FFCC00; /* Jaune */
+    text-shadow: 
+        4px 4px 0 #3264c8,
+        -4px 4px 0 #3264c8,
+        4px -4px 0 #3264c8,
+        -4px -4px 0 #3264c8,
+        0px 6px 0 #3264c8,
+        0px -6px 0 #3264c8; /* Simule un contour épais */
+    transform: skew(-10deg);
+    letter-spacing: 2px;
+    text-align: center;
+}
+footer{
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 20px;
+    color: #FFCC00; /* Jaune */
+    text-shadow: 
+        2px 2px 0 #3264c8,
+        -2px 2px 0 #3264c8,
+        2px -2px 0 #3264c8,
+        -2px -2px 0 #3264c8,
+        0px 3px 0 #3264c8,
+        0px -3px 0 #3264c8; /* Simule un contour épais */
+    transform: skew(-10deg);
+    letter-spacing: 2px;
+    text-align: center;
+
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+    /* Image en fond */
+    background-image: url("/Pokemonback.jpg");
+    background-size:width 100%;       /* couvre tout l'écran */
+    background-position: center;  /* centre l'image */
+    background-repeat: no-repeat; /* pas de répétition */
+}
+
+#feed-container {
+    display: flex;
+    flex-wrap: wrap; /* permet de passer à la ligne suivante */
+    justify-content: center; /* centre les cartes horizontalement */
+    gap: 20px; /* espace entre les cartes */
+    margin-top: 50px;
+}
+
+/* Carte Pokémon */
+.cartePokemon {
+    width: calc(50% - 20px);
+    max-width: 300px;
+    border: 6px solid #FFD700; /* fine bordure dorée */
+    border-radius: 12px;
+    padding: 15px;
+    
+    background: linear-gradient(135deg, #F5F5F5, #FAFAF2); /* dégradé léger */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* ombre plus prononcée */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+
+.cartePokemon:hover {
+ transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* Image du Pokémon */
+.imagePokemon {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%; /* image ronde */
+    margin-bottom: 15px;
+}
+
+/* Textes à l’intérieur de la carte */
+.cartePokemon p {
+    margin: 5px 0;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+.voteBtn {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #3466AF;
+  color: #FFCB05;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.voteBtn:hover {
+  background-color: #244a92;
+}
+
+
+
+@media (max-width: 600px) {
+    .cartePokemon {
+        width: 100%; /* une carte par ligne sur mobile */
+        max-width: none;
+    }
+}
