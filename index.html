@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-     <meta charset="UTF-8">
+
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Le meilleur Pokemon</title>
     <link rel="stylesheet" href="style.css">
-  </head>
+</head>
 
-  <body>
+<body>
     <header>
+        <div class="dropdown">
+            <button id="menuBtn">Menu ▼</button>
+            <div id="menuContent" class="hidden">
+                <button data-section="vote">Vote</button>
+                <button data-section="share">Partage</button>
+                <button data-section="gallery">Galerie</button>
+            </div>
+        </div>
 
     </header>
     <main>
-        <h1>Vote pour ton Pokemon préféré!</h1>  
-        <div id="feed-container">
-        
-        </div>
+        <section id="vote">
+            <h1>Vote pour ton Pokemon préféré!</h1>
+            <div id="feed-container"></div>
+        </section>
+        <section id="share">
+            <h2>Partage ton Pokemon</h2>
+            <p>Ici tu pourras partager ton Pokémon favori !</p>
+        </section>
+        <section id="gallery">
+            <h2>Galerie</h2>
+            <p>Découvre tous les Pokémon dans la galerie.</p>
+        </section>
+    </main>
     </main>
     <footer>
-      <p>Merci à l'API Tyradex pour les données <3 </p>
+        <p>Merci à l'API Tyradex pour les données <3 </p>
 
     </footer>
     <script src="app.js"></script>
-  </body>
+</body>
+
 </html>
