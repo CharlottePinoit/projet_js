@@ -86,8 +86,6 @@ const createCard = (article) => {
         // Sauvegarder dans le localStorage
         localStorage.setItem("pokemonVotes", JSON.stringify(votes));
         voteCount.textContent = `Votes : ${votes[article.name]}`;
-        // MAJ visuelle
-        voteCount.textContent = `Votes : ${votes[article.name]}`;
         alert(`Vous avez voté pour ${article.name} !`);
         // Désactive le bouton après vote (optionnel mais pratique)
         voteBtn.disabled = true;
@@ -98,7 +96,6 @@ const createCard = (article) => {
     return card;
 };
 
-// Fonction pour générer des IDs uniques
 // Fonction pour générer des IDs uniques
 function getRandomIDs(n, max) {
     const ids = new Set();
@@ -198,10 +195,31 @@ document.addEventListener("DOMContentLoaded", () => {
     handleTypeChange();
 });
 
-
-//formulaire dynamique
+//tableau pour stocker les pokémons créés par les utilisateurs avant de les afficher dans la galerie
+const userPokemons = [];
+//FORMULAIRE DYNAMIQUE
 const form = document.getElementById("pokemonForm");
 const userFeed = document.getElementById("user-pokemon-feed"); // nouveau conteneur
+const galleryContainer = document.getElementById("gallery-container"); // conteneur de la galerie
+
+//récupération des cartes déjà créées par l'utilisateur dans le localStorage
+const savedPokemons = localStorage.getItem("userPokemons");
+if (savedPokemons) {
+    userPokemons.push(...JSON.parse(savedPokemons));
+
+    //afficher dans le feed sous le formulaire
+    userPokemons.forEach(pokemon => {
+        const feedCard = createCard(pokemon);
+        if (feedCard) userFeed.appendChild(feedCard);
+    });
+
+    //affiche dans la galerie
+    displayGallery(userPokemons);
+
+    //s'assure que le mode par défaut est appliqué (mosaïque)
+    galleryContainer.classList.add("mosaic");
+    galleryContainer.classList.remove("column");
+}
 
 form.addEventListener("submit", function (event) {
     event.preventDefault(); // empêche le rechargement de la page
@@ -216,13 +234,42 @@ form.addEventListener("submit", function (event) {
     const newPokemon = { name, type, numPv, image };
 
     // créer la carte en utilisant la fonction existante
-    const card = createCard(newPokemon);
+    const cardFeed = createCard(newPokemon);
+    if (cardFeed) userFeed.appendChild(cardFeed);
 
-    // ajouter la carte au conteneur userFeed
-    if (card) {
-        userFeed.appendChild(card);
-    }
+
+
+    userPokemons.push(newPokemon);
+
+    localStorage.setItem("userPokemons", JSON.stringify(userPokemons));
+
+    displayGallery(userPokemons);
 
     // réinitialiser le formulaire
     form.reset();
 });
+
+
+//PARTIE GALERIE
+
+function displayGallery(pokemons) {
+    galleryContainer.innerHTML = ""; // vide avant affichage
+
+    pokemons.forEach(pokemon => {
+        const card = createCard(pokemon);
+        if (card) galleryContainer.appendChild(card);
+    });
+}
+//BOUTON POUR CHANGER AFFICHAGE DE LA GALERIE
+document.getElementById("mosaicBtn").addEventListener("click", () => {
+    galleryContainer.classList.add("mosaic");
+    galleryContainer.classList.remove("column");
+});
+
+document.getElementById("columnBtn").addEventListener("click", () => {
+    galleryContainer.classList.add("column");
+    galleryContainer.classList.remove("mosaic");
+});
+
+// Affichage initial en mosaïque
+galleryContainer.classList.add("mosaic");
