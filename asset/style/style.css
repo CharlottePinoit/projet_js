@@ -39,7 +39,7 @@ margin: 0;
 font-family: Arial, sans-serif;
 
 /* Image en fond */
-background-image: url("asset/images/Pokemonback.jpg");
+background-image: url("../images/Pokemonback.jpg");
 background-size: cover; /* couvre tout l'écran */
 background-position: center; /* centre l'image */
 background-repeat: no-repeat; /* pas de répétition */
@@ -177,4 +177,49 @@ transform: scale(1.05);
 /* Classe pour cacher le menu */
 .hidden {
 display: none;
+}
+
+
+/* Section formulaire dynamique */
+#share {
+background: transparent; /* permet de voir le fond du body */
+padding: 20px;
+text-align: center;
+}
+/* Conteneur des cartes utilisateurs */
+#user-pokemon-feed {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 20px;
+margin-top: 30px;
+background: transparent; /* laisse le fond visible */
+}
+/* Formulaire */
+#pokemonForm {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 10px;
+margin-bottom: 20px;
+background: rgba(255, 255, 255, 0.2); /* optionnel : légère transparence */
+padding: 15px;
+border-radius: 12px;
+}
+
+#pokemonForm input, #pokemonForm button {
+padding: 8px 12px;
+border-radius: 8px;
+border: 2px solid #FFD700;
+}
+#pokemonForm button {
+background-color: #FFCC00;
+color: #3264C8;
+font-weight: bold;
+cursor: pointer;
+transition: 0.2s;
+}
+#pokemonForm button:hover {
+background-color: #FFE14C;
+transform: scale(1.05);
 }

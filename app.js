@@ -165,3 +165,64 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+//dabord je crée une fonction pour remplir le select des types de pokémon avec les couleurs associées
+function populateTypeSelect() {
+    const typeSelect = document.getElementById("pokemonType");
+
+    Object.keys(typeColors).forEach(type => {
+        const option = document.createElement("option");
+        option.value = type;
+        option.textContent = type;
+        typeSelect.appendChild(option);
+    });
+}
+function handleTypeChange() {
+    const typeSelect = document.getElementById("pokemonType");
+
+    typeSelect.addEventListener("change", function () {
+        const selectedType = this.value;
+
+        if (typeColors[selectedType]) {
+            this.style.backgroundColor = typeColors[selectedType];
+            this.style.color = "white";
+        } else {
+            this.style.backgroundColor = "";
+            this.style.color = "";
+        }
+    });
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    populateTypeSelect();
+    handleTypeChange();
+});
+
+
+//formulaire dynamique
+const form = document.getElementById("pokemonForm");
+const userFeed = document.getElementById("user-pokemon-feed"); // nouveau conteneur
+
+form.addEventListener("submit", function (event) {
+    event.preventDefault(); // empêche le rechargement de la page
+
+    // récupérer les valeurs
+    const name = document.getElementById("pokemonName").value;
+    const type = document.getElementById("pokemonType").value;
+    const numPv = document.getElementById("pokemonPV").value;
+    const image = document.getElementById("pokemonImage").value;
+
+    // créer l'objet Pokémon
+    const newPokemon = { name, type, numPv, image };
+
+    // créer la carte en utilisant la fonction existante
+    const card = createCard(newPokemon);
+
+    // ajouter la carte au conteneur userFeed
+    if (card) {
+        userFeed.appendChild(card);
+    }
+
+    // réinitialiser le formulaire
+    form.reset();
+});

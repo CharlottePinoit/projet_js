@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Le meilleur Pokemon</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="asset/style/style.css">
 </head>
 
 <body>
@@ -25,10 +25,22 @@
             <h1>Vote pour ton Pokemon préféré!</h1>
             <div id="feed-container"></div>
         </section>
+
         <section id="share">
             <h2>Partage ton Pokemon</h2>
-            <p>Ici tu pourras partager ton Pokémon favori !</p>
+            <p>Ici tu peux nous envoyer une photo de ton Pokémon préféré !</p>
+            <form id="pokemonForm">
+                <input type="text" id="pokemonName" placeholder="Nom du Pokémon" required>
+                <select id="pokemonType" required>
+                    <option value="">-- Choisir un type --</option>
+                </select>
+                <input type="number" id="pokemonPV" placeholder="Points de vie" required>
+                <input type="url" id="pokemonImage" placeholder="URL de l'image" required>
+                <button type="submit">Envoyer</button>
+            </form>
+            <div id="user-pokemon-feed"></div>
         </section>
+
         <section id="gallery">
             <h2>Galerie</h2>
             <p>Découvre tous les Pokémon dans la galerie.</p>
