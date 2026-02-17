@@ -318,6 +318,7 @@ border-radius: 8px;
 #ad-container img {
 width: 100%;
 display: none;
+border-radius: 0;
 }
 
 #ad-container img.active {

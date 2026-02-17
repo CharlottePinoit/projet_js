@@ -147,7 +147,6 @@ displayFeed();
 
 //document.addEventListener("DOMContentLoaded", displayFeed);
 
-
 //menu DROPDOWN
 document.addEventListener("DOMContentLoaded", () => {
     //on récupère d'abbord les éléments
@@ -160,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     // Scroll vers la section quand on clique sur un bouton du menu
     const menuButtons = menuContent.querySelectorAll("button[data-section]");
-    menuButtons.forEach(btn => {
+    menuButtons.forEach((btn) => {
         btn.addEventListener("click", () => {
             const sectionId = btn.getAttribute("data-section");
             const section = document.getElementById(sectionId);
@@ -177,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function populateTypeSelect() {
     const typeSelect = document.getElementById("pokemonType");
 
-    Object.keys(typeColors).forEach(type => {
+    Object.keys(typeColors).forEach((type) => {
         const option = document.createElement("option");
         option.value = type;
         option.textContent = type;
@@ -200,7 +199,6 @@ function handleTypeChange() {
     });
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
     populateTypeSelect();
     handleTypeChange();
@@ -212,6 +210,9 @@ const userPokemons = [];
 const form = document.getElementById("pokemonForm");
 const userFeed = document.getElementById("user-pokemon-feed"); // nouveau conteneur
 const galleryContainer = document.getElementById("gallery-container"); // conteneur de la galerie
+const adContainer = document.getElementById("ad-container"); // conteneur pour la publicité
+let adSlides = [];
+let currentAd = 0;
 
 //récupération des cartes déjà créées par l'utilisateur dans le localStorage
 const savedPokemons = localStorage.getItem("userPokemons");
@@ -219,7 +220,7 @@ if (savedPokemons) {
     userPokemons.push(...JSON.parse(savedPokemons));
 
     //afficher dans le feed sous le formulaire
-    userPokemons.forEach(pokemon => {
+    userPokemons.forEach((pokemon) => {
         const feedCard = createCard(pokemon);
         if (feedCard) userFeed.appendChild(feedCard);
     });
@@ -252,12 +253,13 @@ form.addEventListener("submit", function (event) {
     const cardGallery = cardFeed.cloneNode(true); // clone de la carte
     const deleteBtn = cardGallery.querySelector(".deleteBtn");
 
-
     galleryContainer.appendChild(cardGallery);
 
     //Stockage dans le tableau et localStorage
     userPokemons.push(newPokemon);
     localStorage.setItem("userPokemons", JSON.stringify(userPokemons));
+
+    refreshAdCarousel();
 
     // réinitialiser le formulaire
     form.reset();
@@ -268,7 +270,7 @@ form.addEventListener("submit", function (event) {
 function displayGallery(pokemons) {
     galleryContainer.innerHTML = ""; // vide avant affichage
 
-    pokemons.forEach(pokemon => {
+    pokemons.forEach((pokemon) => {
         const card = createCard(pokemon);
         if (card) galleryContainer.appendChild(card);
     });
@@ -276,12 +278,14 @@ function displayGallery(pokemons) {
 //PARTIE SUPPRESSION
 function deletePokemon(id) {
     // Supprimer du tableau
-    const index = userPokemons.findIndex(p => p.id === id);
+    const index = userPokemons.findIndex((p) => p.id === id);
     if (index === -1) {
         alert("Erreur : Pokémon introuvable.");
         return;
     }
-    const confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer ce Pokémon ?");
+    const confirmDelete = confirm(
+        "Êtes-vous sûr de vouloir supprimer ce Pokémon ?",
+    );
     if (!confirmDelete) return;
 
     userPokemons.splice(index, 1);
@@ -296,15 +300,11 @@ function deletePokemon(id) {
 function refreshUserFeed() {
     userFeed.innerHTML = "";
 
-    userPokemons.forEach(pokemon => {
+    userPokemons.forEach((pokemon) => {
         const card = createCard(pokemon);
         if (card) userFeed.appendChild(card);
     });
 }
-
-
-
-
 
 //BOUTON POUR CHANGER AFFICHAGE DE LA GALERIE
 document.getElementById("mosaicBtn").addEventListener("click", () => {
@@ -319,3 +319,38 @@ document.getElementById("columnBtn").addEventListener("click", () => {
 
 // Affichage initial en mosaïque
 galleryContainer.classList.add("mosaic");
+
+//Partie PUB
+function setupAdCarousel() {
+    adContainer.innerHTML = ""; // vide le conteneur avant d'ajouter les pubs
+
+    const galleryImages = document.querySelectorAll(
+        "#gallery-container .cartePokemon img",
+    );
+
+    galleryImages.forEach((img) => {
+        const clone = img.cloneNode(true);
+        adContainer.appendChild(clone);
+    });
+    adSlides = adContainer.querySelectorAll("img");
+
+    if (adSlides.length > 0) {
+        adSlides[0].classList.add("active");
+    }
+}
+function rotateAds() {
+    if (adSlides.length === 0) return;
+
+    adSlides[currentAd].classList.remove("active");
+    currentAd = (currentAd + 1) % adSlides.length;
+    adSlides[currentAd].classList.add("active");
+}
+
+function refreshAdCarousel() {
+    currentAd = 0;
+    setupAdCarousel();
+}
+
+
+setupAdCarousel();
+setInterval(rotateAds, 3000); // changement toutes les 3 secondes
