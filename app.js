@@ -249,7 +249,6 @@ form.addEventListener("submit", function (event) {
     form.reset();
 });
 
-
 //PARTIE GALERIE
 
 function displayGallery(pokemons) {
