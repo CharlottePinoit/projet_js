@@ -254,7 +254,8 @@ text-align: center;
 margin-bottom: 15px;
 }
 
-#gallery-controls button {
+#gallery-controls button,
+.cartePokemon .deleteBtn {
 margin: 0 10px;
 padding: 8px 15px;
 border-radius: 6px;
@@ -271,15 +272,54 @@ transform: scale(1.05);
 transition: 0.2s;
 }
 
+/* Mode colonne : cacher le bouton supprimer */
+#gallery-container.column .cartePokemon .deleteBtn {
+display: none;
+}
+
 /* Mode mosaïque : montrer uniquement image + bouton */
 #gallery-container.mosaic .cartePokemon h3,
 #gallery-container.mosaic .cartePokemon p:not(.voteCount),
 #gallery-container.mosaic .cartePokemon .pokemonType,
-#gallery-container.mosaic .cartePokemon .pokemonPV {
-display: none; /* cache le nom, type, PV */
+#gallery-container.mosaic .cartePokemon .pokemonPV,
+#gallery-container.mosaic .cartePokemon .deleteBtn {
+display: none; /* cache le nom, type, PV et le bouton supprimer */
 }
 /* Optionnel : carte plus compacte */
 #gallery-container.mosaic .cartePokemon {
 width: 120px; /* petites cartes pour voir beaucoup en même temps */
 padding: 5px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+/* Centrer l'image en mode mosaïque */
+#gallery-container.mosaic .imagePokemon {
+width: 100px;
+height: 100px;
+margin-bottom: 5px;
+}
+
+
+
+/*Partie PUB*/
+#ad-container {
+position: relative;
+width: 100%;
+max-width: 600px; /* largeur max du carrousel */
+margin: 20px auto;
+overflow: hidden;
+border: 2px solid #3264c8;
+border-radius: 8px;
+}
+
+#ad-container img {
+width: 100%;
+display: none;
+}
+
+#ad-container img.active {
+display: block;
 }

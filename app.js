@@ -93,6 +93,17 @@ const createCard = (article) => {
     });
 
     card.appendChild(voteBtn);
+
+    if (article.id) {
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Supprimer";
+        deleteBtn.classList.add("deleteBtn");
+
+        deleteBtn.addEventListener("click", () => {
+            deletePokemon(article.id);
+        });
+        card.appendChild(deleteBtn);
+    }
     return card;
 };
 
@@ -230,20 +241,23 @@ form.addEventListener("submit", function (event) {
     const numPv = document.getElementById("pokemonPV").value;
     const image = document.getElementById("pokemonImage").value;
 
-    // créer l'objet Pokémon
-    const newPokemon = { name, type, numPv, image };
+    // créer l'objet Pokémon avec un ID unique
+    const newPokemon = { id: Date.now(), name, type, numPv, image };
 
-    // créer la carte en utilisant la fonction existante
+    // Carte pour le feedUser
     const cardFeed = createCard(newPokemon);
-    if (cardFeed) userFeed.appendChild(cardFeed);
+    if (cardFeed) userFeed.appendChild(cardFeed); // bouton supprimer présent
+
+    //Carte pour la galerie
+    const cardGallery = cardFeed.cloneNode(true); // clone de la carte
+    const deleteBtn = cardGallery.querySelector(".deleteBtn");
 
 
+    galleryContainer.appendChild(cardGallery);
 
+    //Stockage dans le tableau et localStorage
     userPokemons.push(newPokemon);
-
     localStorage.setItem("userPokemons", JSON.stringify(userPokemons));
-
-    displayGallery(userPokemons);
 
     // réinitialiser le formulaire
     form.reset();
@@ -259,6 +273,39 @@ function displayGallery(pokemons) {
         if (card) galleryContainer.appendChild(card);
     });
 }
+//PARTIE SUPPRESSION
+function deletePokemon(id) {
+    // Supprimer du tableau
+    const index = userPokemons.findIndex(p => p.id === id);
+    if (index === -1) {
+        alert("Erreur : Pokémon introuvable.");
+        return;
+    }
+    const confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer ce Pokémon ?");
+    if (!confirmDelete) return;
+
+    userPokemons.splice(index, 1);
+
+    localStorage.setItem("userPokemons", JSON.stringify(userPokemons));
+
+    refreshUserFeed();
+
+    displayGallery(userPokemons);
+}
+
+function refreshUserFeed() {
+    userFeed.innerHTML = "";
+
+    userPokemons.forEach(pokemon => {
+        const card = createCard(pokemon);
+        if (card) userFeed.appendChild(card);
+    });
+}
+
+
+
+
+
 //BOUTON POUR CHANGER AFFICHAGE DE LA GALERIE
 document.getElementById("mosaicBtn").addEventListener("click", () => {
     galleryContainer.classList.add("mosaic");
