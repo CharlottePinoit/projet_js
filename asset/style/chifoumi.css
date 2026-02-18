@@ -1,0 +1,346 @@
+/* ============================================================
+chifoumi.css — Styles du jeu Chi-Fu-Mi Pokémon
+============================================================ */
+
+#chifoumi {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 25px;
+padding: 40px 20px;
+text-align: center;
+min-height: 80vh;
+}
+
+#chifoumi h2 {
+font-family: 'Fredoka One', sans-serif;
+font-size: 42px;
+color: #FFCC00;
+text-shadow:
+3px 3px 0 #3264c8,
+-3px 3px 0 #3264c8,
+3px -3px 0 #3264c8,
+-3px -3px 0 #3264c8;
+margin: 0;
+}
+
+#chifoumi > p {
+font-size: 18px;
+color: #fff;
+background: rgba(0, 0, 0, 0.4);
+padding: 10px 20px;
+border-radius: 10px;
+font-weight: bold;
+text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/* -------------------------------------------------------
+AFFICHAGE DES SCORES
+------------------------------------------------------- */
+#chifoumi-scores {
+display: flex;
+gap: 20px;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+.score-box {
+background: linear-gradient(135deg, rgba(255, 204, 0, 0.9), rgba(255, 224, 76, 0.9));
+border: 4px solid #3264C8;
+border-radius: 12px;
+padding: 15px 25px;
+min-width: 120px;
+box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+.score-box p {
+margin: 0 0 5px 0;
+font-family: 'Fredoka One', sans-serif;
+font-size: 14px;
+color: #3264C8;
+}
+
+.score-box span {
+display: block;
+font-family: 'Fredoka One', sans-serif;
+font-size: 36px;
+color: #C03028;
+text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+/* -------------------------------------------------------
+BOUTONS DE CHOIX DES STARTERS
+------------------------------------------------------- */
+#chifoumi-choices {
+display: flex;
+gap: 20px;
+flex-wrap: wrap;
+justify-content: center;
+margin-top: 10px;
+}
+
+.starter-btn {
+background: linear-gradient(135deg, #F5F5F5, #FAFAF2);
+border: 5px solid #FFD700;
+border-radius: 16px;
+padding: 20px;
+width: 180px;
+cursor: pointer;
+transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.starter-btn:hover {
+transform: translateY(-8px) scale(1.05);
+box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+border-color: #FFCC00;
+}
+
+.starter-btn:active {
+transform: translateY(-4px) scale(1.02);
+}
+
+.starter-btn img {
+width: 120px;
+height: 120px;
+object-fit: contain;
+margin-bottom: 10px;
+}
+
+.starter-btn p {
+font-family: 'Fredoka One', sans-serif;
+font-size: 20px;
+color: #3264C8;
+margin: 0;
+}
+
+/* Couleurs spécifiques par type */
+.starter-btn[data-choice="feu"]:hover {
+background: linear-gradient(135deg, #FFDDCC, #FFE5D9);
+border-color: #F08030;
+}
+
+.starter-btn[data-choice="plante"]:hover {
+background: linear-gradient(135deg, #D4F1D4, #E8F8E8);
+border-color: #78C850;
+}
+
+.starter-btn[data-choice="eau"]:hover {
+background: linear-gradient(135deg, #D4E8FF, #E5F2FF);
+border-color: #6890F0;
+}
+
+/* -------------------------------------------------------
+ZONE DE RÉSULTAT DU COMBAT
+------------------------------------------------------- */
+#chifoumi-result {
+background: rgba(255, 255, 255, 0.95);
+border: 5px solid #3264C8;
+border-radius: 20px;
+padding: 30px;
+max-width: 700px;
+box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+from {
+opacity: 0;
+transform: translateY(-20px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+#battle-display {
+display: flex;
+justify-content: space-around;
+align-items: center;
+gap: 20px;
+margin-bottom: 25px;
+flex-wrap: wrap;
+}
+
+.fighter {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 8px;
+}
+
+.fighter > p:first-child {
+font-family: 'Fredoka One', sans-serif;
+font-size: 16px;
+color: #3264C8;
+margin: 0;
+}
+
+.fighter img {
+width: 100px;
+height: 100px;
+object-fit: contain;
+background: linear-gradient(135deg, #F5F5F5, #FAFAF2);
+border: 3px solid #FFD700;
+border-radius: 12px;
+padding: 8px;
+}
+
+.fighter p:last-child {
+font-family: Arial, sans-serif;
+font-weight: bold;
+font-size: 18px;
+color: #1D2C5E;
+margin: 0;
+}
+
+.vs {
+font-family: 'Fredoka One', sans-serif;
+font-size: 32px;
+color: #C03028;
+text-shadow: 2px 2px 0 #FFCC00;
+}
+
+/* -------------------------------------------------------
+MESSAGE DE RÉSULTAT
+------------------------------------------------------- */
+#result-message {
+font-family: 'Fredoka One', sans-serif;
+font-size: 24px;
+margin: 20px 0;
+padding: 15px;
+border-radius: 10px;
+}
+
+#result-message.win {
+background: linear-gradient(135deg, #78C850, #a8e070);
+color: #fff;
+text-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+}
+
+#result-message.lose {
+background: linear-gradient(135deg, #F08030, #ff9d5c);
+color: #fff;
+text-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+}
+
+#result-message.tie {
+background: linear-gradient(135deg, #A8A878, #c4c49a);
+color: #fff;
+text-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+}
+
+/* -------------------------------------------------------
+BOUTONS D'ACTION
+------------------------------------------------------- */
+#play-again-btn,
+#reset-scores-btn {
+padding: 12px 28px;
+font-family: 'Fredoka One', sans-serif;
+font-size: 18px;
+border: 3px solid #3264C8;
+border-radius: 10px;
+cursor: pointer;
+transition: transform 0.2s, background-color 0.2s;
+}
+
+#play-again-btn {
+background-color: #FFCC00;
+color: #3264C8;
+}
+
+#play-again-btn:hover {
+background-color: #FFE14C;
+transform: scale(1.05);
+}
+
+#reset-scores-btn {
+background-color: #C03028;
+color: #fff;
+margin-top: 10px;
+}
+
+#reset-scores-btn:hover {
+background-color: #d64545;
+transform: scale(1.05);
+}
+
+/* -------------------------------------------------------
+CLASSE UTILITAIRE
+------------------------------------------------------- */
+.hidden {
+display: none !important;
+}
+
+/* -------------------------------------------------------
+CHOIX SPÉCIAUX : Pikachu & Évoli
+------------------------------------------------------- */
+.starter-special {
+position: relative;
+border-width: 6px;
+}
+
+.starter-special[data-choice="pikachu"] {
+border-color: #F8D030;
+background: linear-gradient(135deg, #F5F5F5, #FAFAF2);
+}
+
+.starter-special[data-choice="pikachu"]:hover {
+background: linear-gradient(135deg, #FFEA70, #FFF4A3);
+box-shadow: 0 12px 30px rgba(248, 208, 48, 0.6);
+}
+
+.starter-special[data-choice="evoli"] {
+border-color: #F8D030;
+background: linear-gradient(135deg, #F5F5F5, #FAFAF2);
+}
+
+.starter-special[data-choice="evoli"]:hover {
+background: linear-gradient(135deg, #D4D4B8, #E8E8D0);
+box-shadow: 0 12px 30px rgba(168, 168, 120, 0.6);
+border-color: #A8A878;
+}
+
+
+
+@keyframes pulse {
+0%, 100% {
+transform: scale(1);
+}
+50% {
+transform: scale(1.1);
+}
+}
+
+/* -------------------------------------------------------
+RESPONSIVE
+------------------------------------------------------- */
+@media (max-width: 700px) {
+#chifoumi h2 {
+font-size: 32px;
+}
+
+.starter-btn {
+width: 140px;
+padding: 15px;
+}
+
+.starter-btn img {
+width: 90px;
+height: 90px;
+}
+
+.fighter img {
+width: 80px;
+height: 80px;
+}
+
+.vs {
+font-size: 24px;
+}
+
+#result-message {
+font-size: 18px;
+}
+}

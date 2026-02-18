@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Le meilleur Pokemon</title>
     <link rel="stylesheet" href="asset/style/style.css">
+    <link rel="stylesheet" href="asset/style/memory.css">
+    <link rel="stylesheet" href="asset/style/chifoumi.css">
+    <link rel="stylesheet" href="asset/style/demineur.css">
 </head>
 
 <body>
@@ -16,11 +19,14 @@
                 <button data-section="vote">Vote</button>
                 <button data-section="share">Partage</button>
                 <button data-section="gallery">Galerie</button>
+                <button data-section="memory">🎮 Memory</button>
+                <button data-section="chifoumi">🔥 Chi-Fu-Mi</button>
+                <button data-section="demineur">👻 Démineur</button>
             </div>
         </div>
 
     </header>
-    <main>
+    <>
         <section id="vote">
             <h1>Vote pour ton Pokemon préféré!</h1>
             <div id="feed-container"></div>
@@ -51,13 +57,153 @@
             </div>
             <div id="gallery-container"></div>
         </section>
-    </main>
-    </main>
-    <footer>
-        <p>Merci à l'API Tyradex pour les données <3 </p>
 
-    </footer>
-    <script src="app.js"></script>
+
+        <section id="memory">
+            <h2>🎮 Memory Pokémon</h2>
+            <div id="memory-setup">
+                <label for="difficultySelect">Choisis ton niveau :</label>
+                <select id="difficultySelect">
+                    <option value="">-- Choisir un niveau --</option>
+                    <option value="easy">Facile (5 paires / 15 tentatives)</option>
+                    <option value="medium">Moyen (15 paires / 35 tentatives)</option>
+                    <option value="hard">Difficile (25 paires / 60 tentatives)</option>
+                </select>
+                <button id="startGameBtn">Lancer la partie !</button>
+            </div>
+            <div id="memory-info" class="hidden">
+                <p>Niveau : <span id="info-level"></span></p>
+                <p>Paires à trouver : <span id="info-pairs"></span></p>
+                <p>Tentatives restantes : <span id="info-attempts"></span></p>
+                <p>Paires trouvées : <span id="info-found">0</span></p>
+            </div>
+            <div id="memory-stats">
+                <p>🏆 Parties jouées : <span id="stat-games">0</span></p>
+                <p>⭐ Meilleur score : <span id="stat-best">-</span></p>
+            </div>
+            <div id="memory-board"></div>
+            <div id="memory-message" class="hidden">
+                <p id="message-text"></p>
+                <button id="restartBtn">Rejouer</button>
+            </div>
+        </section>
+        <section id="chifoumi">
+            <h2>🔥 Chi-Fu-Mi Pokémon</h2>
+            <p>Choisis ton starter ! Feu bat Plante, Plante bat Eau, Eau bat Feu</p>
+
+
+            <div id="chifoumi-scores">
+                <div class="score-box">
+                    <p>🏆 Victoires</p>
+                    <span id="user-wins">0</span>
+                </div>
+                <div class="score-box">
+                    <p>🤖 Défaites</p>
+                    <span id="computer-wins">0</span>
+                </div>
+                <div class="score-box">
+                    <p>🤝 Égalités</p>
+                    <span id="ties">0</span>
+                </div>
+            </div>
+
+
+            <div id="chifoumi-choices">
+                <button class="starter-btn starter-special" data-choice="pikachu">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
+                        alt="Pikachu">
+                    <p>Pikachu</p>
+                </button>
+                <button class="starter-btn" data-choice="feu">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png"
+                        alt="Salamèche">
+                    <p>🔥 Feu</p>
+                </button>
+                <button class="starter-btn" data-choice="plante">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+                        alt="Bulbizarre">
+                    <p>🌿 Plante</p>
+                </button>
+                <button class="starter-btn" data-choice="eau">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png"
+                        alt="Carapuce">
+                    <p>💧 Eau</p>
+                </button>
+                <button class="starter-btn starter-special" data-choice="evoli">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png"
+                        alt="Évoli">
+                    <p>Évoli</p>
+                </button>
+            </div>
+
+            <div id="chifoumi-result" class="hidden">
+                <div id="battle-display">
+                    <div class="fighter">
+                        <p>Ton choix</p>
+                        <img id="user-choice-img" src="" alt="">
+                        <p id="user-choice-text"></p>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="fighter">
+                        <p>Rival</p>
+                        <img id="computer-choice-img" src="" alt="">
+                        <p id="computer-choice-text"></p>
+                    </div>
+                </div>
+                <p id="result-message"></p>
+                <button id="play-again-btn">Rejouer</button>
+            </div>
+
+            <button id="reset-scores-btn">Réinitialiser les scores</button>
+        </section>
+
+        <section id="demineur">
+            <h2>👻 Démineur Pokémon</h2>
+            <p>Trouve tous les Fantominus cachés sans en réveiller un seul !</p>
+
+            <div id="demineur-setup">
+                <label for="difficultySelectDemineur">Niveau de difficulté :</label>
+                <select id="difficultySelectDemineur">
+                    <option value="facile">Facile (8×8, 10 Fantominus)</option>
+                    <option value="moyen" selected>Moyen (12×12, 20 Fantominus)</option>
+                    <option value="difficile">Difficile (16×16, 40 Fantominus)</option>
+                </select>
+                <button id="newGameBtn">Nouvelle partie</button>
+            </div>
+
+            <div id="demineur-info">
+                <div class="info-box">
+                    <p>👻 Fantominus restants</p>
+                    <span id="mines-count">20</span>
+                </div>
+                <div class="info-box">
+                    <p>⏱️ Temps</p>
+                    <span id="timer">0</span>
+                </div>
+                <div class="info-box">
+                    <p>🏆 Meilleur temps</p>
+                    <span id="best-time">-</span>
+                </div>
+            </div>
+
+            <div id="demineur-board"></div>
+
+            <!-- Message de fin -->
+            <div id="demineur-message" class="hidden">
+                <p id="demineur-result-text"></p>
+                <button id="restart-demineur-btn">Nouvelle partie</button>
+            </div>
+        </section>
+
+        </main>
+        <footer>
+            <p>Merci à l'API Tyradex pour les données <3 </p>
+
+        </footer>
+        <script src="app.js"></script>
+        <script src="memory.js"></script>
+        <script src="chifoumi.js"></script>
+        <script src="demineur.js"></script>
 </body>
 
 </html>
